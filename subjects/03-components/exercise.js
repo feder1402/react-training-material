@@ -16,11 +16,4 @@ import React from 'react'
 import { render } from 'react-dom'
 import { App } from './app'
 
-
-const DATA = [
-  {id: 1, name: 'USA', description: 'Land of the Free, Home of the brave'},
-  {id: 2, name: 'Brazil', description: 'Sunshine, beaches, and Carnival'},
-  {id: 3, name: 'Russia', description: 'World Cup 2018!'}
-]
-
-render(<App countries = { DATA }/>, document.getElementById('app'))
+render(<App/>, document.getElementById('app'))

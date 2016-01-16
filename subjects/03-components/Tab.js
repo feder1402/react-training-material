@@ -1,7 +1,7 @@
 import React from 'react'
 import { styles } from './styles'
 
-const { arrayOf, bool, func, shape, string } = React.PropTypes;
+const { bool, func, string } = React.PropTypes;
 
 export const Tab = React.createClass({
   propTypes: {
@@ -10,16 +10,16 @@ export const Tab = React.createClass({
     title: string.isRequired
   },
 
-  onClick() {
-    this.props.onChange(event.target.key)
-  },
-
   render() {
-    const { isActive, title } = this.props;
-    const style = isActive ? styles.activeTab : styles.tab
+    const { isActive, onChange, title } = this.props;
 
     return (
-        <div className="Tab" onClick={ this.onClick } style={style}>{title}</div>
+        <div
+            onClick = { onChange }
+            style = { isActive ? styles.activeTab : styles.tab }
+        >
+          { title }
+        </div>
     )
   }
 })

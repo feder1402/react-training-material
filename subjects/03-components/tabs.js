@@ -1,5 +1,6 @@
 import React from 'react'
 import { Tab } from './tab'
+import { styles } from'./styles'
 
 const { arrayOf, shape, string } = React.PropTypes;
 
@@ -7,7 +8,7 @@ const Panel = (props) => <div className="TabPanel" style={ styles.panel }>{ prop
 
 export const Tabs = React.createClass({
   propTypes: {
-    data: arrayOf(
+    tabs: arrayOf(
         shape({
           title: string,
           content: string
@@ -19,28 +20,24 @@ export const Tabs = React.createClass({
     return {activeTab: 0}
   },
 
-  onChange(activeTab) {
-    this.setState({ activeTab })
-  },
-
   render() {
-    const { data } = this.props
+    const { tabs } = this.props
     const { activeTab } = this.state
-    const content = data[activeTab].content
+    const content = tabs[activeTab].content
 
     return (
         <div>
-          <div className = "Tabs">
-            {data.map((item, index) =>
+          <div>
+            {tabs.map((tab, index) =>
                 <Tab
-                    isActive = { index === activeTab }
                     key = { index }
-                    title = { item.title }
-                    onChange = { () => this.onChange( index ) }
+                    isActive = { index === activeTab }
+                    title = { tab.title }
+                    onChange = { () => this.setState({ activeTab: index }) }
                 />
             )}
           </div>
-          <Panel className = "Panel" content = { content }/>
+          <Panel content = { content }/>
         </div>
     )
   }
