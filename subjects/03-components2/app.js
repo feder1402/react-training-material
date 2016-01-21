@@ -1,13 +1,7 @@
 import React from 'react'
 import { Tabs } from './tabs'
+import { Tab } from './tab'
 import { styles } from './styles'
-
-const DATA = [
-  {id: 1, name: 'USA', description: 'Land of the Free, Home of the brave'},
-  {id: 2, name: 'Brazil', description: 'Sunshine, beaches, and Carnival'},
-  {id: 3, name: 'Russia', description: 'World Cup 2018!'},
-  {id: 4, name: 'Argentina', description: 'World Cup 1978!'}
-]
 
 const { object } = React.PropTypes;
 
@@ -16,24 +10,29 @@ export const App = React.createClass({
     styles: object
   },
 
-  getChildContext: function() {
-    return { styles };
+  getChildContext: function () {
+    return {styles};
   },
 
   render() {
-    var tabData = DATA.map((item) => {
-      let { name: title, description: content } = item
-      return {title, content}
-    })
-
     return (
         <div>
-          <h1>Countries</h1>
-          <tabs>
-            <tab title = 'Tab1'>Tab 1 content</tab>
-            <tab title = 'Tab2'>Tab 2 content</tab>
-            <tab title = 'Tab3'>Tab 3 content</tab>
-          </tabs>
+          <h1>Flexible tabs</h1>
+          <Tabs>
+            <Tab title="Tab1">
+              Content for <h1>Tab 1</h1>
+            </Tab>
+            <Tab title="Tab2">
+              Content for <h2>Tab 2</h2>
+            </Tab>
+            <Tab title="Tab3">
+              Content for <h3>Tab 3</h3>
+            </Tab>
+            <Tab title="Surprise!">
+              <img src="./flamingo.jpg" height="200" width="200"/>
+              <h2>Is Back!</h2>
+            </Tab>
+          </Tabs>
         </div>
     )
   }

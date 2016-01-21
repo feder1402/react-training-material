@@ -1,5 +1,6 @@
 import React from 'react'
 import { Tabs } from './tabs'
+import { Tab } from './tab'
 import { styles } from './styles'
 
 const { object } = React.PropTypes;

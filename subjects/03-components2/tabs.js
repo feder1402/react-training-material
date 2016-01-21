@@ -2,41 +2,35 @@ import React from 'react'
 import { Tab } from './tab'
 import { styles } from'./styles'
 
-const { arrayOf, shape, string } = React.PropTypes;
-
 const Panel = (props) => <div className="TabPanel" style={ styles.panel }>{ props.content }</div>;
 
 export const Tabs = React.createClass({
-  propTypes: {
-    tabs: arrayOf(
-        shape({
-          title: string,
-          content: string
-        })
-    )
+  getInitialState() {
+    return { activeTab: 0 }
   },
 
-  getInitialState() {
-    return {activeTab: 0}
+  onTabChange(activeTab, content) {
+    this.setState({ activeTab, content })
   },
 
   render() {
-    const { tabs } = this.props
-    const { activeTab } = this.state
-    const content = tabs[activeTab].content
+    const { children } = this.props
+    const { activeTab, content } = this.state
 
+    var index = -1;
+    const tabs = React.Children.map(children, (child) =>
+        React.cloneElement(child,
+            {
+              key: ++index,
+              isActive:  index === activeTab,
+              index: index,
+              onChange: this.onTabChange
+            }))
     return (
         <div>
           <div>
-            {tabs.map((tab, index) =>
-                <Tab
-                    key = { index }
-                    isActive = { index === activeTab }
-                    title = { tab.title }
-                    onChange = { () => this.setState({ activeTab: index }) }
-                />
-            )}
           </div>
+          {tabs}
           <Panel content = { content }/>
         </div>
     )
